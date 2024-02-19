@@ -16,6 +16,9 @@ module Knapsack
 
         node_tests = filter_excluded_folders(allocator.stringify_node_tests, folders)
 
+        Knapsack.logger.info 'Executed tests:'
+        Knapsack.logger.info node_tests
+
         cmd = %Q[bundle exec rspec #{args} --default-path #{allocator.test_dir} -- #{node_tests}]
 
         exec(cmd)
