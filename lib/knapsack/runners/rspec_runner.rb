@@ -4,7 +4,7 @@ module Knapsack
       def self.run(args, folders, knapsack_flags)
         allocator = Knapsack::AllocatorBuilder.new(Knapsack::Adapters::RSpecAdapter).allocator
 
-        unless flag_included?(knapsack_flags, 'quiet')
+        unless flag_included?(knapsack_flags, 'hide-allocator-info')
           Knapsack.logger.info
           Knapsack.logger.info 'Report specs:'
           Knapsack.logger.info allocator.report_node_tests
@@ -16,8 +16,10 @@ module Knapsack
 
         node_tests = filter_excluded_folders(allocator.stringify_node_tests, folders)
 
-        Knapsack.logger.info 'Executing Command:'
-        Knapsack.logger.info "bundle exec rspec #{args} --default-path #{allocator.test_dir} -- #{node_tests}"
+        if flag_included?(knapsack_flags, 'verbose')
+          Knapsack.logger.info 'Executing Command:'
+          Knapsack.logger.info "bundle exec rspec #{args} --default-path #{allocator.test_dir} -- #{node_tests}"
+        end
 
         cmd = %Q[bundle exec rspec #{args} --default-path #{allocator.test_dir} -- #{node_tests}]
 
