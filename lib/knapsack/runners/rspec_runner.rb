@@ -3,7 +3,6 @@ module Knapsack
     class RSpecRunner
       def self.run(args, folders, knapsack_flags)
         allocator = Knapsack::AllocatorBuilder.new(Knapsack::Adapters::RSpecAdapter).allocator
-        puts "***** FLAGS into the rake: #{knapsack_flags} ******"
 
         unless flag_included?(knapsack_flags, 'hide-allocator-info')
           Knapsack.logger.info
