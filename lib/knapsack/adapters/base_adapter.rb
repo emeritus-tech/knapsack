@@ -22,8 +22,6 @@ module Knapsack
           Knapsack.logger.info 'Knapsack time offset warning enabled!'
           bind_time_tracker
           bind_time_offset_warning
-        else
-          Knapsack.logger.warn 'Knapsack adapter is off!'
         end
       end
 
